@@ -1,0 +1,22 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 1920
+height = 1080
+vsync = 0
+
+[android]
+input_method = HiddenInputField
+
+[project]
+title = JOSHU Kanji
+publisher = Bubba Software
+developer = Blake Herrera
+
+[html5]
+show_made_with_defold = 0
+

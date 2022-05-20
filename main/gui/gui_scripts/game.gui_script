@@ -41,7 +41,7 @@ local kanjiPuzzleBank = {
 	["本"]="日山屋当",
 	["田"]="山町口中",
 	["見"]="味花学本",
-	["先"]="生来末間",
+	["先"]="生来末間", -- this looks wrong...
 	["手"]="上空紙芸",
 	["茶"]="緑紅色道",
 	["米"]="日白国屋",
@@ -64,7 +64,7 @@ function init(self)
 	-- Remove this function if not needed
 	math.randomseed(socket.gettime()%10000)
 	set_timer()
-	seconds = 10
+	seconds = 64
 	msg.post(".", "acquire_input_focus")
 	score = 0
 	new_puzzle()
@@ -198,10 +198,43 @@ function set_timer()
 end
 
 function update_timer_label()
-	if seconds > 0 then
+	local red = vmath.vector4(0.9, 0.1, 0.1, 1)
+	local yellow = vmath.vector4(0.9, 0.9, 0.1, 1)
+	local green = vmath.vector4(0.1, 0.9, 0.1, 1)
+	local black = vmath.vector4(0, 0, 0, 1)
+	local white = vmath.vector4(1, 1, 1, 1)
+	local whiteAlpha = vmath.vector4(1, 1, 1, 0.98)
+	local invisible = vmath.vector4(0, 0, 0, 0)
+	
+	if seconds == 64 then
+		sound.play("/game#countdown", {delay = 0, gain = 0.9, speed = 1})
+		gui.set_color(gui.get_node("red"), black)
+		gui.set_color(gui.get_node("yellow"), black)
+		gui.set_color(gui.get_node("green"), black)
+		seconds = seconds - 1
+	elseif seconds == 63 then
+		seconds = seconds - 1
+		gui.animate(gui.get_node("red"), gui.PROP_COLOR, red, gui.EASING_LINEAR, 0.05)
+	elseif seconds == 62 then
+		seconds = seconds - 1
+		gui.animate(gui.get_node("yellow"), gui.PROP_COLOR, yellow, gui.EASING_LINEAR, 0.05, 0, reset_box)
+	elseif seconds == 61 then
+		seconds = seconds - 1
+		gui.animate(gui.get_node("green"), gui.PROP_COLOR, green, gui.EASING_LINEAR, 0.05, 0, reset_box)
+	elseif seconds == 60 then
+		gui.set_color(gui.get_node("red"), invisible)
+		gui.set_color(gui.get_node("yellow"), invisible)
+		gui.set_color(gui.get_node("green"), invisible)
+		gui.set_color(gui.get_node("hideContent"), invisible)
+		seconds = seconds - 1
+		gui.set_text(gui.get_node("seconds"), seconds)
+	elseif seconds > 0 then
 		seconds = seconds - 1
 		gui.set_text(gui.get_node("seconds"), seconds)
 	elseif seconds == 0 then 
+		gui.set_color(gui.get_node("hideContent"), whiteAlpha)
+		gui.set_color(gui.get_node("gameOver"), white)
+		gui.set_color(gui.get_node("score"), white)
 		print("\n== GAME OVER == \n Score: "..score)
 		seconds = seconds - 1
 	end

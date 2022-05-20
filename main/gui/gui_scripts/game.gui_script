@@ -1,6 +1,6 @@
 local puzzleIndex
 local score
-
+local seconds
 
 local kanjiPuzzleBank = {
 	["A"]="Aa@$",
@@ -25,6 +25,8 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	math.randomseed(socket.gettime()%10000)
+	set_timer()
+	seconds = 10
 	msg.post(".", "acquire_input_focus")
 	score = 0
 	new_puzzle()
@@ -73,13 +75,18 @@ end
 function check_answer(num) 
 	local correct = kanjiPuzzleKeys[puzzleIndex]
 	local answer = gui.get_text(gui.get_node("kanji"..num))
-	print("Checking answer "..num)
 	if correct == answer then
 		score = score + 1
 		highlight_box(gui.get_node("btn"..num), true)
+		highlight_box(gui.get_node("points"), true)
 	else
+		if score > 0 then
+			score = score - 1
+		end
 		highlight_box(gui.get_node("btn"..num), false)
+		highlight_box(gui.get_node("points"), false)
 	end
+	gui.set_text(gui.get_node("points"), ""..score)
 end
 
 function reset_box(node)
@@ -90,13 +97,14 @@ function reset_box(node)
 	gui.animate(gui.get_node("btn4"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
 	gui.animate(gui.get_node("btn5"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
 	gui.animate(gui.get_node("btn6"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
+	gui.animate(gui.get_node("points"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
 	new_puzzle()
 end
 
 function highlight_box(node, correct)
 	-- only called to highlight node1 yellow
-	local green = vmath.vector4(0.1, 1, 0.1, 1)
-	local red = vmath.vector4(1, 0.1, 0.1, 1)
+	local green = vmath.vector4(0.4, 0.9, 0.4, 1)
+	local red = vmath.vector4(0.9, 0.4, 0.4, 1)
 	if correct then
 		gui.animate(node, gui.PROP_COLOR, green, gui.EASING_LINEAR, 0.05, 0, reset_box)
 	else
@@ -136,6 +144,20 @@ function set_random_kanji(node)
 			gui.set_text(node, c)
 		end
 		index = index + 1
+	end
+end
+
+function set_timer()
+	local timer = timer.delay(1, true, update_timer_label)
+end
+
+function update_timer_label()
+	if seconds > 0 then
+		seconds = seconds - 1
+		gui.set_text(gui.get_node("seconds"), seconds)
+	elseif seconds == 0 then 
+		print("\n== GAME OVER == \n Score: "..score)
+		seconds = seconds - 1
 	end
 end
 

@@ -3,6 +3,14 @@ fonts {
   name: "light"
   font: "/main/fonts/defold/light.font"
 }
+fonts {
+  name: "lightBig"
+  font: "/main/fonts/defold/lightBig.font"
+}
+fonts {
+  name: "timer"
+  font: "/main/fonts/defold/timer.font"
+}
 textures {
   name: "images"
   texture: "/main/atlases/images.atlas"
@@ -70,7 +78,7 @@ nodes {
 }
 nodes {
   position {
-    x: 225.0
+    x: 300.0
     y: 895.0
     z: 0.0
     w: 1.0
@@ -88,8 +96,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 225.0
-    y: 225.0
+    x: 300.0
+    y: 300.0
     z: 0.0
     w: 1.0
   }
@@ -157,7 +165,7 @@ nodes {
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
   text: "\345\255\227"
-  font: "light"
+  font: "lightBig"
   id: "kanji1"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -189,8 +197,8 @@ nodes {
 }
 nodes {
   position {
-    x: 225.0
-    y: 550.0
+    x: 300.0
+    y: 535.0
     z: 0.0
     w: 1.0
   }
@@ -207,8 +215,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 225.0
-    y: 225.0
+    x: 300.0
+    y: 300.0
     z: 0.0
     w: 1.0
   }
@@ -276,7 +284,7 @@ nodes {
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
   text: "\345\255\227"
-  font: "light"
+  font: "lightBig"
   id: "kanji2"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -308,8 +316,8 @@ nodes {
 }
 nodes {
   position {
-    x: 225.0
-    y: 200.0
+    x: 300.0
+    y: 175.0
     z: 0.0
     w: 1.0
   }
@@ -326,8 +334,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 225.0
-    y: 225.0
+    x: 300.0
+    y: 300.0
     z: 0.0
     w: 1.0
   }
@@ -395,7 +403,7 @@ nodes {
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
   text: "\345\255\227"
-  font: "light"
+  font: "lightBig"
   id: "kanji3"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -427,7 +435,7 @@ nodes {
 }
 nodes {
   position {
-    x: 1700.0
+    x: 1636.0
     y: 895.0
     z: 0.0
     w: 1.0
@@ -445,8 +453,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 225.0
-    y: 225.0
+    x: 300.0
+    y: 300.0
     z: 0.0
     w: 1.0
   }
@@ -514,7 +522,7 @@ nodes {
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
   text: "\345\255\227"
-  font: "light"
+  font: "lightBig"
   id: "kanji4"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -546,8 +554,8 @@ nodes {
 }
 nodes {
   position {
-    x: 1700.0
-    y: 550.0
+    x: 1636.0
+    y: 535.0
     z: 0.0
     w: 1.0
   }
@@ -564,8 +572,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 225.0
-    y: 225.0
+    x: 300.0
+    y: 300.0
     z: 0.0
     w: 1.0
   }
@@ -633,7 +641,7 @@ nodes {
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
   text: "\345\255\227"
-  font: "light"
+  font: "lightBig"
   id: "kanji5"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -665,8 +673,8 @@ nodes {
 }
 nodes {
   position {
-    x: 1700.0
-    y: 200.0
+    x: 1636.0
+    y: 175.0
     z: 0.0
     w: 1.0
   }
@@ -683,8 +691,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 225.0
-    y: 225.0
+    x: 300.0
+    y: 300.0
     z: 0.0
     w: 1.0
   }
@@ -752,7 +760,7 @@ nodes {
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
   text: "\345\255\227"
-  font: "light"
+  font: "lightBig"
   id: "kanji6"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -772,6 +780,447 @@ nodes {
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
   parent: "btn6"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 980.0
+    y: 659.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "\345\255\227"
+  font: "light"
+  id: "puzzleKanji1"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 980.0
+    y: 162.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "\345\255\227"
+  font: "light"
+  id: "puzzleKanji2"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 716.0
+    y: 412.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "\345\255\227"
+  font: "light"
+  id: "puzzleKanji3"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 1247.0
+    y: 412.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "\345\255\227"
+  font: "light"
+  id: "puzzleKanj4"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 830.0
+    y: 930.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "00"
+  font: "timer"
+  id: "minutes"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 1150.0
+    y: 930.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "00"
+  font: "timer"
+  id: "seconds"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 979.0
+    y: 937.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: ":"
+  font: "timer"
+  id: "colon"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
   layer: ""
   inherit_alpha: true
   alpha: 1.0

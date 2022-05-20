@@ -2,23 +2,61 @@ local puzzleIndex
 local score
 local seconds
 
-local kanjiPuzzleBank = {
-	["A"]="Aa@$",
-	["B"]="BbyP",
-	["C"]="Cc&*",
-	["D"]="Dd:|",
-	["E"]="Ee3(",
-	["F"]="Ff4%"
-}
+-- local kanjiPuzzleBank = {
+-- 	["A"]="Aa@$",
+-- 	["B"]="BbyP",
+-- 	["C"]="Cc&*",
+-- 	["D"]="Dd:|",
+-- 	["E"]="Ee3(",
+-- 	["F"]="Ff4%"
+-- }
+-- local kanjiPuzzleKeys = {
+-- 	"A",
+-- 	"B",
+-- 	"C",
+-- 	"D",
+-- 	"E",
+-- 	"F"
+-- }
+
 local kanjiPuzzleKeys = {
-	"A",
-	"B",
-	"C",
-	"D",
-	"E",
-	"F"
+	"本",
+	"田",
+	"見",
+	"先",
+	"手",
+	"茶",
+	"米",
+	"風",
+	"気",
+	"食",
+	"店",
+	"料",
+	"学",
+	"人",
+	"日",
 }
-local kanjiPuzzleBankLength = 6
+
+local kanjiPuzzleBank = {
+	["本"]="日山屋当",
+	["田"]="山町口中",
+	["見"]="味花学本",
+	["先"]="生来末間",
+	["手"]="上空紙芸",
+	["茶"]="緑紅色道",
+	["米"]="日白国屋",
+	["風"]="台西力車",
+	["気"]="天空分温",
+	["食"]="和夜品事",
+	["店"]="名開員長",
+	["料"]="食給金理",
+	["学"]="中大生年",
+	["人"]="米外外家",
+	["日"]="明昨本曜",
+}
+
+
+local kanjiPuzzleBankLength = 15
 
 function init(self)
 	-- Add initialization code here
@@ -118,12 +156,20 @@ function new_puzzle()
 end
 
 function set_new_puzzle_chars() 
-	local indexArr = shuffle({1,2,3,4})
+	local puzzleChars = {}
 
-	gui.set_text(gui.get_node("puzzleKanji1"), string.sub(kanjiPuzzleBank[kanjiPuzzleKeys[puzzleIndex]], indexArr[1], indexArr[1]))
-	gui.set_text(gui.get_node("puzzleKanji2"), string.sub(kanjiPuzzleBank[kanjiPuzzleKeys[puzzleIndex]], indexArr[2], indexArr[2]))
-	gui.set_text(gui.get_node("puzzleKanji3"), string.sub(kanjiPuzzleBank[kanjiPuzzleKeys[puzzleIndex]], indexArr[3], indexArr[3]))
-	gui.set_text(gui.get_node("puzzleKanji4"), string.sub(kanjiPuzzleBank[kanjiPuzzleKeys[puzzleIndex]], indexArr[4], indexArr[4]))
+	for c in kanjiPuzzleBank[kanjiPuzzleKeys[puzzleIndex]]:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
+		table.insert(puzzleChars, c)
+	end
+	
+	local indexArr = shuffle({1,2})
+
+	gui.set_text(gui.get_node("puzzleKanji1"), puzzleChars[indexArr[1]])
+	gui.set_text(gui.get_node("puzzleKanji2"), puzzleChars[indexArr[2]])
+
+	indexArr = shuffle({3,4})
+	gui.set_text(gui.get_node("puzzleKanji3"), puzzleChars[indexArr[1]])
+	gui.set_text(gui.get_node("puzzleKanji4"), puzzleChars[indexArr[2]])
 
 	indexArr = shuffle({1,2,3,4,5,6})
 	gui.set_text(gui.get_node("kanji"..indexArr[1]), kanjiPuzzleKeys[puzzleIndex])

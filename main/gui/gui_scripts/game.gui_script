@@ -1,4 +1,6 @@
 local puzzleIndex
+local score
+
 
 local kanjiPuzzleBank = {
 	["A"]="Aa@$",
@@ -23,6 +25,8 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	math.randomseed(socket.gettime()%10000)
+	msg.post(".", "acquire_input_focus")
+	score = 0
 	new_puzzle()
 end
 
@@ -45,15 +49,19 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
+	if action_id == hash("touch") and action.pressed and gui.pick_node(gui.get_node("btn1"), action.x, action.y) then
+		check_answer(1)
+	elseif action_id == hash("touch") and action.pressed and gui.pick_node(gui.get_node("btn2"), action.x, action.y) then
+		check_answer(2)
+	elseif action_id == hash("touch") and action.pressed and gui.pick_node(gui.get_node("btn3"), action.x, action.y) then
+		check_answer(3)
+	elseif action_id == hash("touch") and action.pressed and gui.pick_node(gui.get_node("btn4"), action.x, action.y) then
+		check_answer(4)
+	elseif action_id == hash("touch") and action.pressed and gui.pick_node(gui.get_node("btn5"), action.x, action.y) then
+		check_answer(5)
+	elseif action_id == hash("touch") and action.pressed and gui.pick_node(gui.get_node("btn6"), action.x, action.y) then
+		check_answer(6)
+	end
 end
 
 function on_reload(self)
@@ -62,18 +70,38 @@ function on_reload(self)
 	-- Remove this function if not needed
 end
 
+function check_answer(num) 
+	local correct = kanjiPuzzleKeys[puzzleIndex]
+	local answer = gui.get_text(gui.get_node("kanji"..num))
+	print("Checking answer "..num)
+	if correct == answer then
+		score = score + 1
+		highlight_box(gui.get_node("btn"..num), true)
+	else
+		highlight_box(gui.get_node("btn"..num), false)
+	end
+end
+
+function reset_box(node)
+	local white = vmath.vector4(1, 1, 1, 1)
+	gui.animate(gui.get_node("btn1"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
+	gui.animate(gui.get_node("btn2"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
+	gui.animate(gui.get_node("btn3"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
+	gui.animate(gui.get_node("btn4"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
+	gui.animate(gui.get_node("btn5"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
+	gui.animate(gui.get_node("btn6"), gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
+	new_puzzle()
+end
+
 function highlight_box(node, correct)
 	-- only called to highlight node1 yellow
 	local green = vmath.vector4(0.1, 1, 0.1, 1)
 	local red = vmath.vector4(1, 0.1, 0.1, 1)
-	local white = vmath.vector4(1, 0.1, 0.1, 1)
-	color.w = 0.5
 	if correct then
-		gui.animate(node, gui.PROP_COLOR, green, gui.EASING_LINEAR, 0.1)
+		gui.animate(node, gui.PROP_COLOR, green, gui.EASING_LINEAR, 0.05, 0, reset_box)
 	else
-		gui.animate(node, gui.PROP_COLOR, red, gui.EASING_LINEAR, 0.1)
+		gui.animate(node, gui.PROP_COLOR, red, gui.EASING_LINEAR, 0.05, 0, reset_box)
 	end
-	gui.animate(node, gui.PROP_COLOR, white, gui.EASING_LINEAR, 0.2)
 end
 
 function new_puzzle()
@@ -84,8 +112,6 @@ end
 function set_new_puzzle_chars() 
 	local indexArr = shuffle({1,2,3,4})
 
-	print("puzzle index...."..puzzleIndex)
-	print("DEBUG...."..kanjiPuzzleBank[kanjiPuzzleKeys[puzzleIndex]])
 	gui.set_text(gui.get_node("puzzleKanji1"), string.sub(kanjiPuzzleBank[kanjiPuzzleKeys[puzzleIndex]], indexArr[1], indexArr[1]))
 	gui.set_text(gui.get_node("puzzleKanji2"), string.sub(kanjiPuzzleBank[kanjiPuzzleKeys[puzzleIndex]], indexArr[2], indexArr[2]))
 	gui.set_text(gui.get_node("puzzleKanji3"), string.sub(kanjiPuzzleBank[kanjiPuzzleKeys[puzzleIndex]], indexArr[3], indexArr[3]))

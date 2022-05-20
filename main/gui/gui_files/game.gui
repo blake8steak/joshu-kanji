@@ -73,7 +73,7 @@ nodes {
   clipping_inverted: false
   alpha: 1.0
   template_node_child: false
-  size_mode: SIZE_MODE_AUTO
+  size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 nodes {
@@ -109,7 +109,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
+  texture: "images/box"
   id: "btn1"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -228,7 +228,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
+  texture: "images/box"
   id: "btn2"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -347,7 +347,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
+  texture: "images/box"
   id: "btn3"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -466,7 +466,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
+  texture: "images/box"
   id: "btn4"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -585,7 +585,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
+  texture: "images/box"
   id: "btn5"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -704,7 +704,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
+  texture: "images/box"
   id: "btn6"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE

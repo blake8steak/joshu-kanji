@@ -1,6 +1,7 @@
 local puzzleIndex
 local score
 local seconds
+local gameFinished
 
 -- local kanjiPuzzleBank = {
 -- 	["A"]="Aa@$",
@@ -62,6 +63,7 @@ function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
+	gameFinished = false
 	math.randomseed(socket.gettime()%10000)
 	set_timer()
 	seconds = 64
@@ -101,6 +103,11 @@ function on_input(self, action_id, action)
 		check_answer(5)
 	elseif action_id == hash("touch") and action.pressed and gui.pick_node(gui.get_node("btn6"), action.x, action.y) then
 		check_answer(6)
+	elseif action_id == hash("touch") and action.pressed and gui.pick_node(gui.get_node("againBtn"), action.x, action.y) then
+		-- reload collection and play again
+		if gameFinished then
+			msg.post("main:/main#main", "start_game")
+		end
 	end
 end
 
@@ -231,10 +238,13 @@ function update_timer_label()
 	elseif seconds > 0 then
 		seconds = seconds - 1
 		gui.set_text(gui.get_node("seconds"), seconds)
-	elseif seconds == 0 then 
+	elseif seconds == 0 then
+		gameFinished = true 
 		gui.set_color(gui.get_node("hideContent"), whiteAlpha)
 		gui.set_color(gui.get_node("gameOver"), white)
+		gui.set_text(gui.get_node("score"), ""..score)
 		gui.set_color(gui.get_node("score"), white)
+		gui.set_color(gui.get_node("againBtn"), white)
 		print("\n== GAME OVER == \n Score: "..score)
 		seconds = seconds - 1
 	end

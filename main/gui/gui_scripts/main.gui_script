@@ -119,7 +119,7 @@ function on_input(self, action_id, action)
 		sound.play("/joshuLogo#select", {delay = 0, gain = 0.8, speed = 1})
 		print("Start button clicked")
 		--msg.post("/mainMenu#main", "start_searchLevel")
-		msg.post("/main#main", "start_puzzleSelect")
+		msg.post("/main#main", "start_game")
 		sound.stop("/joshuLogo#main_bgm")
 	end
 end

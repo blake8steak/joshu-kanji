@@ -111,7 +111,7 @@ nodes {
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  layer: "button"
+  layer: "background"
   inherit_alpha: true
   slice9 {
     x: 0.0
@@ -166,7 +166,7 @@ nodes {
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  layer: "button"
+  layer: "background"
   inherit_alpha: true
   slice9 {
     x: 0.0
@@ -221,7 +221,7 @@ nodes {
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  layer: "button"
+  layer: "background"
   inherit_alpha: true
   slice9 {
     x: 0.0

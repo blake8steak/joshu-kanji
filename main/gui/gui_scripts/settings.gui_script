@@ -22,7 +22,11 @@ function setTimeOption()
 	elseif timeIndex < 1 then
 		timeIndex = 4
 	end
-	gui.set_text(gui.get_node("timeText"), ""..times[timeIndex])
+	if times[timeIndex] == -1 then
+		gui.set_text(gui.get_node("timeText"), "n/a")
+	else
+		gui.set_text(gui.get_node("timeText"), ""..times[timeIndex])
+	end
 	settings.time = times[timeIndex]
 end
 
@@ -38,6 +42,8 @@ end
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	setTimeOption()
+	setClassOption()
 end
 
 function final(self)

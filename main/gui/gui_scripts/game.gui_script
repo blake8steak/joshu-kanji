@@ -26,7 +26,7 @@ local kanjiPuzzleKeys = {
 	"本",
 	"田",
 	"見",
-	"先",
+	"週",
 	"手",
 	"茶",
 	"米",
@@ -128,6 +128,11 @@ function on_input(self, action_id, action)
 		-- reload collection and play again
 		if gameFinished then
 			msg.post("main:/main#main", "start_game")
+		end
+	elseif action_id == hash("touch") and action.pressed and gui.pick_node(gui.get_node("exitBtn"), action.x, action.y) then
+		-- reload collection and play again
+		if gameFinished then
+			msg.post("main:/main#main", "start_settings")
 		end
 	end
 end
@@ -266,6 +271,7 @@ function update_timer_label()
 		gui.set_text(gui.get_node("score"), ""..score)
 		gui.set_color(gui.get_node("score"), white)
 		gui.set_color(gui.get_node("againBtn"), white)
+		gui.set_color(gui.get_node("exitBtn"), white)
 		print("\n== GAME OVER == \n Score: "..score)
 		seconds = seconds - 1
 	end

@@ -1,3 +1,5 @@
+local RESTARTING_GAME = false
+
 function init(self)
 	--set main menu as default screen
 	msg.post(".", "start_main_menu")
@@ -25,35 +27,45 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start_settings") then
+		if self.state == "GAME" then
+			msg.post("#gameProxy", "disable")
+			msg.post("#gameProxy", "final")
+			msg.post("#gameProxy", "unload")
+		end
 		msg.post("#settingsProxy", "load")
 		msg.post("/main", "disable")
 	elseif message_id == hash("start_game") then
 		if self.state == "GAME" then
+			msg.post("#gameProxy", "disable")
+			msg.post("#gameProxy", "final")
 			msg.post("#gameProxy", "unload")
+			RESTARTING_GAME = true
 		else
+			msg.post("#settingsProxy", "disable")
+			msg.post("#settingsProxy", "final")
+			msg.post("#settingsProxy", "unload")
 			msg.post("#gameProxy", "load")
-			print("1 main.script got here")
 			msg.post("/main", "disable")
-			print("2 main.script got here")
 		end
 	elseif message_id == hash("proxy_loaded") then
 		if sender == msg.url("#gameProxy") then
 			print("=== Game loaded.")
+			msg.post(sender, "init")
 			msg.post(sender, "enable")
-			msg.post("#main", "disable")
 			self.state = "GAME"
 		elseif sender == msg.url("#settingsProxy") then
 			print("=== Settings loaded.")
+			msg.post(sender, "init")
 			msg.post(sender, "enable")
-			msg.post("#main", "disable")
 			self.state = "SETTINGS"
 		end
 	elseif message_id == hash("proxy_unloaded") then
 		print("=== unloaded.")
-		if sender == msg.url("#gameProxy") then
+		if sender == msg.url("#gameProxy") and RESTARTING_GAME then
 			print("=== Game unloaded.")
 			msg.post("#gameProxy", "load")
 			msg.post("/main", "disable")
+			RESTARTING_GAME = false
 		end
 	end
 end

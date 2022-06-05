@@ -412,7 +412,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "60"
+  text: "-"
   font: "lightSmall"
   id: "timeText"
   xanchor: XANCHOR_NONE
@@ -707,7 +707,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "317C"
+  text: "-"
   font: "lightSmall"
   id: "classText"
   xanchor: XANCHOR_NONE

@@ -85,7 +85,7 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	gameFinished = false
-	math.randomseed(socket.gettime()%10000)
+	math.randomseed(socket.gettime()%10000)	
 	set_timer()
 	seconds = settings.time + 4
 	msg.post(".", "acquire_input_focus")
@@ -227,6 +227,7 @@ function set_random_kanji(node)
 end
 
 function set_timer()
+	gui.set_text(gui.get_node("seconds"), "-")
 	local timer = timer.delay(1, true, update_timer_label)
 end
 
@@ -260,7 +261,11 @@ function update_timer_label()
 		gui.set_color(gui.get_node("green"), invisible)
 		gui.set_color(gui.get_node("hideContent"), invisible)
 		seconds = seconds - 1
-		gui.set_text(gui.get_node("seconds"), seconds)
+		if seconds < 0 then
+			gui.set_text(gui.get_node("seconds"), "-")
+		else 
+			gui.set_text(gui.get_node("seconds"), seconds)
+		end
 	elseif seconds > 0 then
 		seconds = seconds - 1
 		gui.set_text(gui.get_node("seconds"), seconds)
@@ -274,6 +279,8 @@ function update_timer_label()
 		gui.set_color(gui.get_node("exitBtn"), white)
 		print("\n== GAME OVER == \n Score: "..score)
 		seconds = seconds - 1
+	elseif seconds < 0 then
+		gui.set_text(gui.get_node("seconds"), "-")
 	end
 end
 

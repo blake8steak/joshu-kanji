@@ -11,6 +11,10 @@ fonts {
   name: "timer"
   font: "/main/fonts/defold/timer.font"
 }
+fonts {
+  name: "lightSmall"
+  font: "/main/fonts/defold/lightSmall.font"
+}
 textures {
   name: "images"
   texture: "/main/atlases/images.atlas"
@@ -1480,8 +1484,8 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "\343\202\262\343\203\274\343\203\240\343\202\252\343\203\274\343\203\220\343\203\274"
-  font: "light"
+  text: "game over"
+  font: "lightBig"
   id: "gameOver"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -1544,7 +1548,7 @@ nodes {
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
   text: "0"
-  font: "lightBig"
+  font: "lightSmall"
   id: "score"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE

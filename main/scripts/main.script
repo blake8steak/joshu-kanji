@@ -24,42 +24,17 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
-
-	-- if message_id == hash("start_searchLevel") then
-	-- 	print("CHANGING TO SEARCH LEVEL")
-	-- 	if self.state == "MAIN_MENU" then
-	-- 		msg.post("#searchLevelProxy", "load")
-	-- 		msg.post("#main_menu", "disable")
-	-- 		self.state = "SEARCH_LEVEL"
-	-- 	end
-
--- 
--- 	if message_id == hash("start_game") then
--- 		print("=== SELF.STATE: "..self.state)
--- 		if self.state == GAME then
--- 			msg.post("#main", "unload")
--- 		else
--- 			msg.post("#gameProxy", "load")
--- 			msg.post("#main", "disable")
--- 		end
--- 	elseif message_id == hash("proxy_loaded") then
--- 		if sender == msg.url("#gameProxy") then
--- 			msg.post(sender, "enable")
--- 			self.state = "GAME"
--- 			--
--- 			--msg.post("#gameProxy", "unload")
--- 		end
--- 	end
-
-	if message_id == hash("start_game") then
+	if message_id == hash("start_settings") then
+		msg.post("#settingsProxy", "load")
+		msg.post("/main", "disable")
+	elseif message_id == hash("start_game") then
 		if self.state == "GAME" then
 			msg.post("#gameProxy", "unload")
 		else
 			msg.post("#gameProxy", "load")
+			print("1 main.script got here")
 			msg.post("/main", "disable")
+			print("2 main.script got here")
 		end
 	elseif message_id == hash("proxy_loaded") then
 		if sender == msg.url("#gameProxy") then
@@ -67,6 +42,11 @@ function on_message(self, message_id, message, sender)
 			msg.post(sender, "enable")
 			msg.post("#main", "disable")
 			self.state = "GAME"
+		elseif sender == msg.url("#settingsProxy") then
+			print("=== Settings loaded.")
+			msg.post(sender, "enable")
+			msg.post("#main", "disable")
+			self.state = "SETTINGS"
 		end
 	elseif message_id == hash("proxy_unloaded") then
 		print("=== unloaded.")

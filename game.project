@@ -19,4 +19,5 @@ developer = Blake Herrera
 
 [html5]
 show_made_with_defold = 0
+splash_image = /main/images/bubbaSplashSmall.png
 

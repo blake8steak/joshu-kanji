@@ -1,0 +1,100 @@
+local settings = require("main.scripts.settings")
+
+local classes = {
+	"601D",
+	"610D",
+	"611D",
+	"317C"
+}
+local classIndex = 1
+
+local times = {
+	60,
+	120,
+	240,
+	-1
+}
+local timeIndex = 1
+
+function setTimeOption()
+	if timeIndex > 4 then
+		timeIndex = 1
+	elseif timeIndex < 1 then
+		timeIndex = 4
+	end
+	gui.set_text(gui.get_node("timeText"), ""..times[timeIndex])
+	settings.time = times[timeIndex]
+end
+
+function setClassOption()
+	if classIndex > 4 then
+		classIndex = 1
+	elseif classIndex < 1 then
+		classIndex = 4
+	end
+	gui.set_text(gui.get_node("classText"), ""..classes[classIndex])
+	settings.class = classes[classIndex]
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here. The game object this script is attached to
+	-- must have acquired input focus:
+	--
+	--    msg.post(".", "acquire_input_focus")
+	--
+	-- All mapped input bindings will be received. Mouse and touch input will
+	-- be received regardless of where on the screen it happened.
+	-- Learn more: https://defold.com/manuals/input/
+	-- Remove this function if not needed
+	if action.pressed and gui.pick_node(gui.get_node("startBtn"), action.x, action.y) then
+		--sound.play("/joshuLogo#select", {delay = 0, gain = 0.8, speed = 1})
+		print("Start button clicked")
+		
+		msg.post("main:/main#main", "start_game")
+		--sound.stop("/joshuLogo#main_bgm")
+	elseif action.pressed and gui.pick_node(gui.get_node("classDown"), action.x, action.y) then
+		--sound.play("/joshuLogo#select", {delay = 0, gain = 0.8, speed = 1})
+		classIndex = classIndex-1
+		setClassOption()
+	elseif action.pressed and gui.pick_node(gui.get_node("classUp"), action.x, action.y) then
+		--sound.play("/joshuLogo#select", {delay = 0, gain = 0.8, speed = 1})
+		classIndex = classIndex+1
+		setClassOption()
+	elseif action.pressed and gui.pick_node(gui.get_node("timeDown"), action.x, action.y) then
+		--sound.play("/joshuLogo#select", {delay = 0, gain = 0.8, speed = 1})
+		timeIndex = timeIndex-1
+		setTimeOption()
+	elseif action.pressed and gui.pick_node(gui.get_node("timeUp"), action.x, action.y) then
+		--sound.play("/joshuLogo#select", {delay = 0, gain = 0.8, speed = 1})
+		timeIndex = timeIndex+1
+		setTimeOption()
+	end
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end

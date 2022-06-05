@@ -118,8 +118,8 @@ function on_input(self, action_id, action)
 	if action.pressed and gui.pick_node(gui.get_node("startButton"), action.x, action.y) then
 		sound.play("/joshuLogo#select", {delay = 0, gain = 0.8, speed = 1})
 		print("Start button clicked")
-		--msg.post("/mainMenu#main", "start_searchLevel")
-		msg.post("/main#main", "start_game")
+		--msg.post("/main#main", "start_game")
+		msg.post("/main#main", "start_settings")
 		sound.stop("/joshuLogo#main_bgm")
 	end
 end

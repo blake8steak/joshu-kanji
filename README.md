@@ -1,4 +1,4 @@
-# JOSHU Word Search
+# JOSHU Kanji
 
 Mini demo:
 <br />

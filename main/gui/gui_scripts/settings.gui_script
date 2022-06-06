@@ -4,7 +4,8 @@ local classes = {
 	"601D",
 	"610D",
 	"611D",
-	"317C"
+	"317C",
+	"320K"
 }
 local classIndex = 1
 
@@ -31,10 +32,10 @@ function setTimeOption()
 end
 
 function setClassOption()
-	if classIndex > 4 then
+	if classIndex > 5 then
 		classIndex = 1
 	elseif classIndex < 1 then
-		classIndex = 4
+		classIndex = 5
 	end
 	gui.set_text(gui.get_node("classText"), ""..classes[classIndex])
 	settings.class = classes[classIndex]

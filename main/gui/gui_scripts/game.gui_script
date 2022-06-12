@@ -1,43 +1,18 @@
 local settings = require("main.scripts.settings")
+local banks = require("main.scripts.puzzleBanks")
+local kanji = require("main.scripts.kanjiBanks")
 
 local puzzleIndex
 local score
 local seconds
 local gameFinished
 
--- local kanjiPuzzleBank = {
--- 	["A"]="Aa@$",
--- 	["B"]="BbyP",
--- 	["C"]="Cc&*",
--- 	["D"]="Dd:|",
--- 	["E"]="Ee3(",
--- 	["F"]="Ff4%"
--- }
--- local kanjiPuzzleKeys = {
--- 	"A",
--- 	"B",
--- 	"C",
--- 	"D",
--- 	"E",
--- 	"F"
--- }
 
+-- This is just an example bank.
 local kanjiPuzzleKeys = {
-	"本",
-	"田",
-	"見",
-	"週",
-	"手",
-	"茶",
-	"米",
-	"風",
-	"気",
-	"食",
-	"店",
-	"料",
-	"学",
-	"人",
-	"日",
+	"a",
+	"b",
+	"c",
 }
 
 local kanjiPuzzleBank = {
@@ -60,25 +35,13 @@ local kanjiPuzzleBank = {
 
 
 	
-	["本"]="日山当屋",
-	["田"]="山町中口",
-	["見"]="味花本学",
-	["週"]="先来間末",
-	["手"]="空上芸紙",
-	["茶"]="紅緑道色",
-	["米"]="日白国屋",
-	["風"]="西台車力",
-	["気"]="天空分温",
-	["食"]="夜和品事",
-	["店"]="開名長員",
-	["料"]="給食理金",
-	["学"]="大中年生",
-	["人"]="外米家外",
-	["日"]="明昨本曜",
+	["a"]="1234",
+	["b"]="2345",
+	["c"]="3456",
 }
 
 
-local kanjiPuzzleBankLength = 15
+local kanjiPuzzleBankLength = 3
 
 function init(self)
 	-- Add initialization code here
@@ -187,7 +150,44 @@ function highlight_box(node, correct)
 	end
 end
 
+-- Gets a random index of the current class, or a class below it.
+function getRandomIndex()
+	if settings.class == "610D" then
+		return 1
+	elseif settings.class == "611D" then
+		return math.random(2)
+	elseif settings.class == "317C" then
+		return math.random(3)
+	elseif settings.class == "320K" then
+		return math.random(4)
+	elseif settings.class == "320L" then
+		return math.random(5)
+	end	
+end
+
 function new_puzzle()
+	local bankIndex = getRandomIndex()
+	if bankIndex == 1 then
+		kanjiPuzzleBankLength = banks.length610D
+		kanjiPuzzleBank = banks.pairs610D
+		kanjiPuzzleKeys = banks.keys610D
+	elseif bankIndex == 2 then
+		kanjiPuzzleBankLength = banks.length611D
+		kanjiPuzzleBank = banks.pairs611D
+		kanjiPuzzleKeys = banks.keys611D
+	elseif bankIndex == 3 then
+		kanjiPuzzleBankLength = banks.length317C
+		kanjiPuzzleBank = banks.pairs317C
+		kanjiPuzzleKeys = banks.keys317C
+	elseif bankIndex == 4 then
+		kanjiPuzzleBankLength = banks.length320K
+		kanjiPuzzleBank = banks.pairs320K
+		kanjiPuzzleKeys = banks.keys320K
+	elseif bankIndex == 5 then
+		kanjiPuzzleBankLength = banks.length320L
+		kanjiPuzzleBank = banks.pairs320L
+		kanjiPuzzleKeys = banks.keys320L
+	end
 	puzzleIndex = math.random(1, kanjiPuzzleBankLength)
 	set_new_puzzle_chars() 
 end
@@ -209,22 +209,76 @@ function set_new_puzzle_chars()
 	gui.set_text(gui.get_node("puzzleKanji4"), puzzleChars[indexArr[2]])
 
 	indexArr = shuffle({1,2,3,4,5,6})
+
+	local kanjiIndexArr = {puzzleIndex, -2, -3, -4, -5, -6}
 	gui.set_text(gui.get_node("kanji"..indexArr[1]), kanjiPuzzleKeys[puzzleIndex])
-	set_random_kanji(gui.get_node("kanji"..indexArr[2]))
-	set_random_kanji(gui.get_node("kanji"..indexArr[3]))
-	set_random_kanji(gui.get_node("kanji"..indexArr[4]))
-	set_random_kanji(gui.get_node("kanji"..indexArr[5]))
-	set_random_kanji(gui.get_node("kanji"..indexArr[6]))
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[2]), kanjiIndexArr, 2)
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[3]), kanjiIndexArr, 3)
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[4]), kanjiIndexArr, 4)
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[5]), kanjiIndexArr, 5)
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[6]), kanjiIndexArr, 6)
 end
 
-function set_random_kanji(node)
-	local kanji = "一九七二人入八力十下三千上口土夕大女子小山川五天中六円手文日月木水火犬王正出本右四左玉生田白目石立百年休先名字早気竹糸耳虫村男町花見貝赤足車学林空金雨青草音校森刀万丸才工弓内午少元今公分切友太引心戸方止毛父牛半市北古台兄冬外広母用矢交会合同回寺地多光当毎池米羽考肉自色行西来何作体弟図声売形汽社角言谷走近里麦画東京夜直国姉妹岩店明歩知長門昼前南点室後春星海活思科秋茶計風食首夏弱原家帰時紙書記通馬高強教理細組船週野雪魚鳥黄黒場晴答絵買朝道番間雲園数新楽話遠電鳴歌算語読聞線親頭曜顔丁予化区反央平申世由氷主仕他代写号去打皮皿礼両曲向州全次安守式死列羊有血住助医君坂局役投対決究豆身返表事育使命味幸始実定岸所放昔板泳注波油受物具委和者取服苦重乗係品客県屋炭度待急指持拾昭相柱洋畑界発研神秒級美負送追面島勉倍真員宮庫庭旅根酒消流病息荷起速配院悪商動宿帳族深球祭第笛終習転進都部問章寒暑植温湖港湯登短童等筆着期勝葉落軽運遊開階陽集悲飲歯業感想暗漢福詩路農鉄意様緑練銀駅鼻横箱談調橋整薬館題"
-	local num = math.random(440)
+function get_unused_kanji(kanjiIndexArr, length)
+	--
+	-- technically, this blocks on
+	-- a given index across all given banks;
+	-- (i.e. if a 10 is generated, index 10
+	-- cannot be pulled from on 610D, 611D, 317C,
+	-- etc.)
+	--
+	-- not really a huge issue tho, this is
+	-- only just pulling randomly generated kanjis
+	-- anyways
+	--
+	local unusedIndexFound = false
+	local num = 1
+	while not unusedIndexFound do
+		num = math.random(length)
+
+		local innerLoopIndexNotFound = false
+		for n=1, 6 do
+			if num == kanjiIndexArr[n] then
+				innerLoopIndexNotFound = true
+				break
+			end
+		end
+
+		if not innerLoopIndexNotFound then
+			return num
+		end
+	end
+end
+
+function set_random_kanji(node, kanjiIndexArr, kanjiNum)
+	local kanjiStr = ""
+	local kanjiIndex = getRandomIndex()
+	local num = 1
+	if kanjiIndex == 1 then
+		kanjiStr = kanji.kanji610D
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji610DLength)
+	elseif kanjiIndex == 2 then
+		kanjiStr = kanji.kanji611D
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji611DLength)
+	elseif kanjiIndex == 3 then
+		kanjiStr = kanji.kanji317C
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji317CLength)
+	elseif kanjiIndex == 4 then
+		kanjiStr = kanji.kanji320K
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji320KLength)
+	elseif kanjiIndex == 5 then
+		kanjiStr = kanji.kanji320L
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji320LLength)
+	end
+
+	kanjiIndexArr[kanjiNum] = num
+	
 	local index = 1
 	-- jank, but idk how else to get kanji to work properly :P
-	for c in kanji:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
+	for c in kanjiStr:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
 		if index == num then
 			gui.set_text(node, c)
+			return kanjiIndexArr
 		end
 		index = index + 1
 	end

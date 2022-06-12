@@ -1,11 +1,11 @@
 local settings = require("main.scripts.settings")
 
 local classes = {
-	"601D",
 	"610D",
 	"611D",
 	"317C",
-	"320K"
+	"320K",
+	"320L"
 }
 local classIndex = 1
 

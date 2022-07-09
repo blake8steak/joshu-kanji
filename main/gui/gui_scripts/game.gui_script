@@ -318,6 +318,7 @@ function update_timer_label()
 		gui.set_color(gui.get_node("yellow"), invisible)
 		gui.set_color(gui.get_node("green"), invisible)
 		gui.set_color(gui.get_node("hideContent"), invisible)
+		sound.play("/game#gameBgm", {delay = 0, gain = 0.5, speed = 1})
 		seconds = seconds - 1
 		if seconds < 0 then
 			gui.set_text(gui.get_node("seconds"), "-")
@@ -329,6 +330,7 @@ function update_timer_label()
 		gui.set_text(gui.get_node("seconds"), seconds)
 	elseif seconds == 0 then
 		gameFinished = true 
+		sound.stop("/game#gameBgm")
 		gui.set_color(gui.get_node("hideContent"), whiteAlpha)
 		gui.set_color(gui.get_node("gameOver"), white)
 		gui.set_text(gui.get_node("score"), ""..score)

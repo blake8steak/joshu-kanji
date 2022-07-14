@@ -211,15 +211,17 @@ function set_new_puzzle_chars()
 	indexArr = shuffle({1,2,3,4,5,6})
 
 	local kanjiIndexArr = {puzzleIndex, -2, -3, -4, -5, -6}
+	local kanjiRandBankIndex = getRandomIndex()
+	
 	gui.set_text(gui.get_node("kanji"..indexArr[1]), kanjiPuzzleKeys[puzzleIndex])
-	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[2]), kanjiIndexArr, 2)
-	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[3]), kanjiIndexArr, 3)
-	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[4]), kanjiIndexArr, 4)
-	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[5]), kanjiIndexArr, 5)
-	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[6]), kanjiIndexArr, 6)
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[2]), kanjiIndexArr, 2, kanjiRandBankIndex, kanjiPuzzleKeys[puzzleIndex])
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[3]), kanjiIndexArr, 3, kanjiRandBankIndex, kanjiPuzzleKeys[puzzleIndex])
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[4]), kanjiIndexArr, 4, kanjiRandBankIndex, kanjiPuzzleKeys[puzzleIndex])
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[5]), kanjiIndexArr, 5, kanjiRandBankIndex, kanjiPuzzleKeys[puzzleIndex])
+	kanjiIndexArr = set_random_kanji(gui.get_node("kanji"..indexArr[6]), kanjiIndexArr, 6, kanjiRandBankIndex, kanjiPuzzleKeys[puzzleIndex])
 end
 
-function get_unused_kanji(kanjiIndexArr, length)
+function get_unused_kanji(kanjiIndexArr, length, kanjiRandBankIndex, correctKanji, kanjiStr)
 	--
 	-- technically, this blocks on
 	-- a given index across all given banks;
@@ -245,30 +247,40 @@ function get_unused_kanji(kanjiIndexArr, length)
 		end
 
 		if not innerLoopIndexNotFound then
-			return num
+			local index = 1
+			-- jank, but idk how else to get kanji to work properly :P
+			for c in kanjiStr:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
+				if index == num then
+					if c == correctKanji then
+						-- duplicate, run again
+					else
+						return num
+					end
+				end
+				index = index + 1
+			end
 		end
 	end
 end
 
-function set_random_kanji(node, kanjiIndexArr, kanjiNum)
+function set_random_kanji(node, kanjiIndexArr, kanjiNum, kanjiIndex, correctKanji)
 	local kanjiStr = ""
-	local kanjiIndex = getRandomIndex()
 	local num = 1
 	if kanjiIndex == 1 then
 		kanjiStr = kanji.kanji610D
-		num = get_unused_kanji(kanjiIndexArr, kanji.kanji610DLength)
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji610DLength, kanjiIndex, correctKanji, kanjiStr)
 	elseif kanjiIndex == 2 then
 		kanjiStr = kanji.kanji611D
-		num = get_unused_kanji(kanjiIndexArr, kanji.kanji611DLength)
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji611DLength, kanjiIndex, correctKanji, kanjiStr)
 	elseif kanjiIndex == 3 then
 		kanjiStr = kanji.kanji317C
-		num = get_unused_kanji(kanjiIndexArr, kanji.kanji317CLength)
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji317CLength, kanjiIndex, correctKanji, kanjiStr)
 	elseif kanjiIndex == 4 then
 		kanjiStr = kanji.kanji320K
-		num = get_unused_kanji(kanjiIndexArr, kanji.kanji320KLength)
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji320KLength, kanjiIndex, correctKanji, kanjiStr)
 	elseif kanjiIndex == 5 then
 		kanjiStr = kanji.kanji320L
-		num = get_unused_kanji(kanjiIndexArr, kanji.kanji320LLength)
+		num = get_unused_kanji(kanjiIndexArr, kanji.kanji320LLength, kanjiIndex, correctKanji, kanjiStr)
 	end
 
 	kanjiIndexArr[kanjiNum] = num

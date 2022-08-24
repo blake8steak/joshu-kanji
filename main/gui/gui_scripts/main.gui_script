@@ -1,6 +1,6 @@
 -- Joshu Methods
 local function showTitleScreenAndActions(self)
-	gui.set_color(self.versionText, vmath.vector4(0, 0, 0, 1))
+	gui.set_color(self.versionText, vmath.vector4(0.7, 0.7, 0.7, 1))
 	print("Executing showTitleScreenAndActions")
 	print("Executing animateLogos")
 	-- Set Animation Delay
@@ -90,7 +90,7 @@ function init(self)
 	self.titleText = gui.get_node("titleText")
 	self.versionText = gui.get_node("versionText")
 
-	gui.set_color(self.versionText, vmath.vector4(1, 1, 1, 1))
+	gui.set_color(self.versionText, vmath.vector4(0, 0, 0, 0))
 	
 	splashScreenAnimate(self)
 	msg.post(".", "acquire_input_focus")

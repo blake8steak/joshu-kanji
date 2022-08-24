@@ -3,10 +3,6 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/main/images/joshu_kanji_title.png"
-  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-}
-images {
   image: "/main/images/circle.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
@@ -32,6 +28,18 @@ images {
 }
 images {
   image: "/main/images/whiteDoor.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/main/images/newTitle.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/main/images/xButton.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/main/images/help.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0

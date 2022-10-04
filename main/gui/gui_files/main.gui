@@ -58,7 +58,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "ver. 20220824"
+  text: "ver. 20221003"
   font: "lightMini"
   id: "versionText"
   xanchor: XANCHOR_NONE

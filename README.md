@@ -6,7 +6,7 @@ Mini demo:
 <img src='https://raw.githubusercontent.com/blake8steak/joshu-kanji/main/main/images/kanjidemo.gif' title='Video Walkthrough' width='400' alt='Video Walkthrough' />
 
 ## Play it here!
-https://laits.utexas.edu/japanese/joshu/games_students/Herrera/JOSHU%20Kanji/
+https://laits.utexas.edu/japanese/joshu/games_students/Herrera/JOSHUKanjiCross/
 
 I created this project for the UT Austin Japanese homework website JOSHU (Japanese Online Self-Help Utility.)
 
